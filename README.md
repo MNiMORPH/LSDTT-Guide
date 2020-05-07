@@ -1,6 +1,4 @@
-# LSDTTInstallationGuides
-
-# Installation instructions (Ubuntu 19.10)
+# LSDTopoTools and LSDTopoTools Terraces Installation instructions (Ubuntu 19.10)
 
 ## Install LSDTT
 
@@ -35,7 +33,7 @@ export PATH=/path/to/your/bin:$PATH
 ```
 LSDTT should now be installed on your computer. Test it is running by typing lsdtt and see if it will autocomplete. If not, run the start up code described in the next step and test again.
 
-# Important note
+## Important note
 Every time you want to use LSDTT, you must navigate to ~/LSDTopoTools/LSDTopoTools2 and run
 
 ```sh
@@ -43,8 +41,9 @@ sh lsdtt2_terminal.sh
 ```
 This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the driver in the command line. 
 
-## Test the install by running a channel extraction on example data.
-### Download the example data to test the LSDTT install and to test the Terraces at a later step.
+You can now test the install by running a channel extraction on example data.
+
+## Download the example data to test the LSDTT install and to test the Terraces at a later step.
 (Set to do on your desktop, but you can do this anywhere.)
 
 ```sh
@@ -60,16 +59,59 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/F
 
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/FloodplainTerraceData/Eel_River_DEM.hdr
 
-# Download parameter file (Text file that tells LSDTT what to do)
+# Download parameter file (Text file that tells LSDTT what to do, we will use this to test the Terraces later)
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/LSDTT_terraces.param
 
-# Download coordinates file: upstream and downstream ends of analysis reach
+# Download coordinates file: upstream and downstream ends of analysis reach (for Terraces later)
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/Eel_River_DEM_coordinates.csv
 ```
+## Test the LSDTT Install by Running a Channel Extraction
 
-### Create the parameter file
+In the Eel River folder you just downloaded the example data into, create a parameter file. This will tell the channel extractor what to do. 
+
 ```sh
-vi eel_area_threshold.driver
+ vi eel_area_threshold.driver
+
+```
+Populate your driver file with this text (modify the read and write path to match your computer):
+
+```sh
+# Parameters for channel extraction
+# Comments are preceeded by the hash symbol
+# Documentation can be found here:
+# https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_channel_extraction.html
+ 
+# These are parameters for the file i/o
+# IMPORTANT: You MUST make the write directory: the code will not work if it doesn't exist.
+read path: /home/shanti/Eel_River_Terrace_Example
+write path: /home/shanti/Eel_River_Terrace_Example
+read fname: Eel_River_DEM
+write fname: Eel_River_DEM
+channel heads fname: NULL
+ 
+# Parameter for filling the DEM
+min_slope_for_fill: 0.0001
+ 
+# Parameters for selecting channels and basins
+ 
+threshold_contributing_pixels: 5000
+print_area_threshold_channels: true
+print_wiener_channels: false
+print_pelletier_channels: false
+print_dreich_channels: false
+ 
+# write hillshade: true
+print_stream_order_raster: true
+print_sources_to_csv: true
+```
+Save and exit from the driver file. 
+
+Run the channel extraction (see above note about ensuring LSDTT is running in your terminal window).
+
+```sh
+lsdtt-channel-extraction eel_area_threshold.param 
+```
+# PICK UP HERE
 
 
 
@@ -78,6 +120,7 @@ vi eel_area_threshold.driver
 
 
 The floodplains driver works similarly.
+
 ```sh
 git clone https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction.git
 cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces/

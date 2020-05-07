@@ -39,7 +39,7 @@ Every time you want to use LSDTT, you must navigate to ~/LSDTopoTools/LSDTopoToo
 ```sh
 sh lsdtt2_terminal.sh
 ```
-This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the driver in the command line. 
+This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the driver in the command line.
 
 You can now test the install by running a channel extraction on example data.
 
@@ -67,7 +67,7 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/e
 ```
 ## Test the LSDTT Install by Running a Channel Extraction
 
-In the Eel River folder you just downloaded the example data into, create a parameter file. This will tell the channel extractor what to do. 
+In the Eel River folder you just downloaded the example data into, create a driver file. This will tell the channel extractor what to do. 
 
 ```sh
  vi eel_area_threshold.driver
@@ -111,10 +111,9 @@ Run the channel extraction (see above note about ensuring LSDTT is running in yo
 ```sh
 lsdtt-channel-extraction eel_area_threshold.param 
 ```
-# PICK UP HERE
+This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by overlying these files in GIS.
 
-
-
+Once you have your extracted channel network and channel heads, you can run the Terrace tool. You must first download and install it.
 
 # Install LSDTT Terrace driver.
 

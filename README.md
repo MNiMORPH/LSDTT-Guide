@@ -221,6 +221,7 @@ DEM_name_terrace_IDs.bil and .hdr: A raster of terrace locations with each terra
 
 Try opening this .bil in GIS to see how your terraces look.
 
+You should now have both LSDTT and the Terraces driver successfully installed. For more detailed instructions and troubleshooting, see links below.
 
 # LSDTT Official Installation instructions:
 The steps above were adapted from the installation guides below.

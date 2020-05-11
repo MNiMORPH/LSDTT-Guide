@@ -1,4 +1,5 @@
 # LSDTopoTools and LSDTopoTools Terraces Installation instructions (Ubuntu 19.10)
+See bottom of page for links to the LSDTopoTools official installation guides and help.
 
 ## Install LSDTopoTools (LSDTT)
 

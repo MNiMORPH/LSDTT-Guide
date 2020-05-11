@@ -1,6 +1,6 @@
 # LSDTopoTools and LSDTopoTools Terraces Installation instructions (Ubuntu 19.10)
 
-## Install LSDTT
+## Install LSDTopoTools (LSDTT)
 
 ### Some prerequisites for LSDTT and Terraces
 
@@ -39,7 +39,7 @@ LSDTT should now be installed on your computer. Test it is running by typing lsd
 vi ~/.profile
 ```
 
-#Add the following lines, updated for your computer:
+Add the following lines, updated for your computer:
 ```sh
 # LSDTT
 export PATH="$PATH:/home/awickert/LSDTopoTools/LSDTopoTools2/bin"
@@ -137,9 +137,8 @@ This will output a number of files, including your channel network (Eel_River_DE
 Once you have your extracted channel network and channel heads, you can run the Terrace tool. You must first download and install it.
 
 # Install LSDTT Terrace driver.
-Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step.
 
-# Finish Terrace installation instructions.
+Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step. Ensure you have all the prerequesite packages installed as well.
 
 ```sh
 git clone https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction.git
@@ -147,9 +146,21 @@ cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terrace
 sudo bash get_terraces.sh
 
 ```
+This will create the file get_terraces.out.
 
+Going forward, you can run the terrace driver by navigating to this folder and typing the command:
 
-Next, open `LSDTT_terraces.param` and edit it to include the proper path to
+```sh
+./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
+```
+
+We will now test the terrace install.
+
+## Test the Terrace install
+
+Navigate to the Example Data folder.
+
+Open `LSDTT_terraces.param` and edit it to include the proper path to
 your `Eel_River_Terrace_Example` folder. 
 
 The parameter file should have this text (modify the read path for your computer):
@@ -200,5 +211,19 @@ cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terrace
 
 ```
 
+This will create a number of files. Including
 
+DEM_name_terrace_IDs.bil and .hdr: A raster of terrace locations with each terrace labelled with a unique ID
+
+Try opening this .bil in GIS to see how your terraces look.
+
+
+# LSDTT Official Installation instructions:
+The steps above were adapted from the installation guides below.
+
+### LSDTT Installation: 
+https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_installation.html#_installing_natively_on_a_linux_system
+
+### Terraces: 
+https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_floodplains_terraces.html#_the_methodology
 

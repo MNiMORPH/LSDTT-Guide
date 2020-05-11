@@ -45,7 +45,7 @@ Add the following lines, updated for your computer:
 export PATH="$PATH:/home/awickert/LSDTopoTools/LSDTopoTools2/bin"
 ```
 
-Save, close, and re-open your terminal (the commands in .profile are run each time you open a new window). LSDTT should now be running automatically. Test this by typing lsdtt and seeing if it will autocomplete.
+Save and close. Open a new terminal window (the commands in .profile are run each time you open a new window). LSDTT should now be running automatically in the new window. Test this by typing lsdtt and seeing if it will autocomplete.
 
 
 ##### Another Option for Running LSDTT

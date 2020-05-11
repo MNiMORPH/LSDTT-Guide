@@ -201,18 +201,21 @@ Min terrace height: 5
 
 ## Now, test the Terrace driver by runnning the Eel River Example.
 
+Navigate back to the Terrace driver functions folder.
+
 ```sh
-#Navigate back to the Terrace driver functions folder.
 
 cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces/
+```
+Run the terrace code inserting the path to your Eel River files.
 
-#Run the terrace code inserting the path to your Eel River files.
+```sh
 
 ./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
 
 ```
 
-This will create a number of files. Including
+This will create a number of files. Including:
 
 DEM_name_terrace_IDs.bil and .hdr: A raster of terrace locations with each terrace labelled with a unique ID
 

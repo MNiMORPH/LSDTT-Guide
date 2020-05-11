@@ -2,7 +2,7 @@
 
 ## Install LSDTT
 
-### Some prerequisites
+### Some prerequisites for LSDTT and Terraces
 
 ```sh
 sudo apt install git
@@ -31,17 +31,36 @@ pwd
 export PATH=/path/to/your/bin:$PATH
 
 ```
-LSDTT should now be installed on your computer. Test it is running by typing lsdtt and see if it will autocomplete. If not, run the start up code described in the next step and test again.
+LSDTT should now be installed on your computer. Test it is running by typing lsdtt and see if it will autocomplete. If not, run the start up code (described in the next step) and test again.
 
-## Important note
-Every time you want to use LSDTT, you must navigate to ~/LSDTopoTools/LSDTopoTools2 and run
+#### Adding LSDTT to your permanent path.
+
+```sh
+vi ~/.profile
+```
+
+#Add the following lines, updated for your computer:
+```sh
+# LSDTT
+export PATH="$PATH:/home/awickert/LSDTopoTools/LSDTopoTools2/bin"
+```
+
+Save, close, and re-open your terminal (the commands in .profile are run each time you open a new window). LSDTT should now be running automatically. Test this by typing lsdtt and seeing if it will autocomplete.
+
+
+##### Another Option for Running LSDTT
+Instead of altering your profile, you can also just run a startup command for LSDTT directly in your terminal window every time you want to start an LSDTT session. 
+
+To do this, navigate to ~/LSDTopoTools/LSDTopoTools2 and run
 
 ```sh
 sh lsdtt2_terminal.sh
 ```
 This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the driver in the command line.
 
-You can now test the install by running a channel extraction on example data.
+
+
+# You can now test the install by running a channel extraction on example data.
 
 ## Download the example data to test the LSDTT install and to test the Terraces at a later step.
 (Set to do on your desktop, but you can do this anywhere.)
@@ -106,19 +125,20 @@ print_sources_to_csv: true
 ```
 Save and exit from the driver file. 
 
-Run the channel extraction (see above note about ensuring LSDTT is running in your terminal window).
+Ensure LSDTT is running in your terminal window (see installation instructions above). 
+
+Now, run the channel extraction.
 
 ```sh
 lsdtt-channel-extraction eel_area_threshold.param 
 ```
-This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by overlying these files in GIS.
+This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by viewing these files in GIS.
 
 Once you have your extracted channel network and channel heads, you can run the Terrace tool. You must first download and install it.
 
 # Install LSDTT Terrace driver.
+Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step.
 
-
-The floodplains driver works similarly.
 
 ```sh
 git clone https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction.git
@@ -128,11 +148,45 @@ sudo bash get_terraces.sh
 ```
 
 
-
 Next, open `LSDTT_terraces.param` and edit it to include the proper path to
-your `Eel_River_Terrace_Example` folder.
+your `Eel_River_Terrace_Example` folder. 
 
-Now, test the Terrace driver by runnning the Eel River Example.
+The parameter file should have this text (modify the read path for your computer):
+
+```sh
+# This is a driver file for LSDTopoTools
+# Any lines with the # symbol in the first row will be ignored
+
+# File information
+dem read extension: bil
+dem write extension: bil
+read path: /LSDTopoTools/Topographic_projects/Eel_River/
+read fname: Eel_River_DEM
+CHeads_file: Eel_River_DEM_ATsources
+coords_csv_file: Eel_River_DEM_coordinates.csv
+
+# Parameters for DEM processing
+Filter topography: true
+Min slope filling: 0.0001
+surface_fitting_window_radius: 6
+
+# Parameters for swath post-processing
+HalfWidth: 1000
+search_radius: 10
+Threshold_SO: 3
+NormaliseToBaseline: 1
+
+# Pararmeters for terrace extraction
+QQ threshold: 0.005
+Relief lower percentile: 25
+Relief upper percentile: 75
+Slope lower percentile: 25
+Slope upper percentile: 75
+Min patch size: 1000
+Min terrace height: 5
+```
+
+## Now, test the Terrace driver by runnning the Eel River Example.
 
 ```sh
 #Navigate back to the Terrace driver functions folder.
@@ -144,16 +198,6 @@ cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terrace
 ./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
 
 ```
-
-
-
-
-
-
-
-Is lsdtt-channel-extraction something that should be installed in a preceding step via LSDTT2 and pip?
-I'm turning these into a Markdown guide that I will put on our group's GitHub.
-
 
 
 

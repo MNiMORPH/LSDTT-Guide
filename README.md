@@ -139,6 +139,7 @@ Once you have your extracted channel network and channel heads, you can run the 
 # Install LSDTT Terrace driver.
 Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step.
 
+# Finish Terrace installation instructions.
 
 ```sh
 git clone https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction.git

@@ -103,8 +103,8 @@ Populate your driver file with this text (modify the read and write path to matc
  
 # These are parameters for the file i/o
 # IMPORTANT: You MUST make the write directory: the code will not work if it doesn't exist.
-read path: /home/shanti/Eel_River_Terrace_Example
-write path: /home/shanti/Eel_River_Terrace_Example
+read path: /path/to/your/folder
+write path: /path/to/your/folder
 read fname: Eel_River_DEM
 write fname: Eel_River_DEM
 channel heads fname: NULL

@@ -159,6 +159,8 @@ We will now test the terrace install.
 
 ## Test the Terrace install
 
+To run the terraces you must have a channel heads (or "sources") file: Eel_River_DEM_ATsources.csv created by running the channel extraction, a coordinates file identifying upstream and downstream points (Eel_River_DEM_coordinates.csv), and a parameter file (LSDTT_terraces.param) in your folder. 
+
 Navigate to the Example Data folder.
 
 Open `LSDTT_terraces.param` and edit it to include the proper path to

@@ -1,9 +1,11 @@
 # LSDTopoTools and LSDTopoTools Terraces Installation instructions (Ubuntu 19.10)
 See bottom of page for links to the LSDTopoTools official installation guides and help.
 
-## Install LSDTopoTools (LSDTT)
+## Install LSDTopoTools2 (LSDTT2)
 
-### Some prerequisites for LSDTT and Terraces
+This program contains the main landscape analysis and channel-extraction algorithms.
+
+### Prerequisites
 
 ```sh
 sudo apt install git
@@ -12,53 +14,64 @@ sudo apt install libpcl-dev
 sudo apt install libfftw3-dev
 ```
 
-#### Make a directory for LSDTT and download it from GitHub.
+### Download
+
+Make a directory for LSDTT and download it from GitHub.
 ```sh
-mkdir LSDTopoTools 
-cd LSDTopoTools
+mkdir $HOME/LSDTopoTools
+cd $HOME/LSDTopoTools
 git clone https://github.com/LSDtopotools/LSDTopoTools2.git
 ```
-#### Navigate to newly created LSDTopoTools2 directory and run the start up script.
 
+### Install
+
+Navigate to newly created LSDTopoTools2 directory and run the start up script.
 ```sh
-cd LSDTopoTools2
-bash lsdtt2_setup.sh
+cd $HOME/LSDTopoTools/LSDTopoTools2
+sh lsdtt2_setup.sh
 ```
-#### Add the binary to your local path.
 
+If this completed successfully, LSDTT should now be installed on your computer. You can test it by typing:
 ```sh
 cd bin
-pwd
-export PATH=/path/to/your/bin:$PATH
-
+./
 ```
-LSDTT should now be installed on your computer. Test it is running by typing lsdtt and see if it will autocomplete. If not, run the start up code (described in the next step) and test again.
 
-#### Adding LSDTT to your permanent path.
+### Add LSDTT to your path
 
+#### Permanent path
+
+Open your bash profile.
 ```sh
 vi ~/.profile
 ```
+*Note: sometimes you will edit `~/.bashrc` instead of `~/.profile`.*
 
-Add the following lines, updated for your computer:
+Add the following lines, with a path to LSDTopoTools that is updated for your computer, to the bottom of your `.profile`. Before pasting, press `i` to enter "insert mode" in vi:
 ```sh
 # LSDTT
-export PATH="$PATH:/home/awickert/LSDTopoTools/LSDTopoTools2/bin"
+export PATH="$PATH:/home/<YOUR_USERNAME>/LSDTopoTools/LSDTopoTools2/bin"
+```
+*To paste within the terminal, press `CTRL+SHIFT+V`.*
+
+Then press `escape` to return to command mode, and `:x`, followed by `enter`, to save and exit.
+
+This will set your path each time you open a new terminal window. However, you opened your current terminal window before changing your `.profile`. To refresh your environment variables (such as your `PATH`) from your `.profile`, type:
+```sh
+source ~/.profile
 ```
 
-Save and close. Open a new terminal window (the commands in .profile are run each time you open a new window). LSDTT should now be running automatically in the new window. Test this by typing lsdtt and seeing if it will autocomplete.
+Test whether the install worked by typing `lsdtt` in any directory EXCEPT `$HOME/LSDTopoTools/LSDTopoTools2/bin` and seeing if it will autocomplete (i.e., by hitting tab twice).
 
+#### Temporary path
 
-##### Another Option for Running LSDTT
-Instead of altering your profile, you can also just run a startup command for LSDTT directly in your terminal window every time you want to start an LSDTT session. 
+Instead of altering your profile, you can also just run a startup command for LSDTT directly in your terminal window every time you want to start an LSDTT session.
 
-To do this, navigate to ~/LSDTopoTools/LSDTopoTools2 and run
-
+To do this, navigate to `$HOME/LSDTopoTools/LSDTopoTools2` and run:
 ```sh
 sh lsdtt2_terminal.sh
 ```
-This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the driver in the command line.
-
+This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the command name (`lsdtt-<something>`) followed by the driver file name into the command prompt.
 
 
 # You can now test the install by running a channel extraction on example data.
@@ -87,53 +100,49 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/e
 ```
 ## Test the LSDTT Install by Running a Channel Extraction
 
-In the Eel River folder you just downloaded the example data into, create a driver file. This will tell the channel extractor what to do. 
+In the Eel River folder you just downloaded the example data into, create a driver file. This will tell the channel extractor what to do.
 
 ```sh
- vi eel_area_threshold.driver
-
+vi eel_area_threshold.driver
 ```
-Populate your driver file with this text (modify the read and write path to match your computer):
+
+Populate your driver file with this text. Modify the read and write path to match your computer's file system:
 
 ```sh
 # Parameters for channel extraction
 # Comments are preceeded by the hash symbol
 # Documentation can be found here:
 # https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_channel_extraction.html
- 
+
 # These are parameters for the file i/o
 # IMPORTANT: You MUST make the write directory: the code will not work if it doesn't exist.
-read path: /path/to/your/folder
-write path: /path/to/your/folder
+read path: /home/<YOUR_USERNAME>/Desktop/Eel_River_Terrace_Example
+write path: /home/<YOUR_USERNAME>/Desktop/Eel_River_Terrace_Example
 read fname: Eel_River_DEM
 write fname: Eel_River_DEM
 channel heads fname: NULL
- 
+
 # Parameter for filling the DEM
 min_slope_for_fill: 0.0001
- 
+
 # Parameters for selecting channels and basins
- 
 threshold_contributing_pixels: 5000
 print_area_threshold_channels: true
 print_wiener_channels: false
 print_pelletier_channels: false
 print_dreich_channels: false
- 
+
 # write hillshade: true
 print_stream_order_raster: true
 print_sources_to_csv: true
 ```
-Save and exit from the driver file. 
-
-Ensure LSDTT is running in your terminal window (see installation instructions above). 
+Save and exit from the driver file.
 
 Now, run the channel extraction.
-
 ```sh
-lsdtt-channel-extraction eel_area_threshold.param 
+lsdtt-channel-extraction eel_area_threshold.driver
 ```
-This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by viewing these files in GIS.
+This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by viewing these files in a GIS.
 
 Once you have your extracted channel network and channel heads, you can run the Terrace tool. You must first download and install it.
 
@@ -142,15 +151,14 @@ Once you have your extracted channel network and channel heads, you can run the 
 Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step. Ensure you have all the prerequesite packages installed as well.
 
 ```sh
+cd $HOME/LSDTopoTools
 git clone https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction.git
 cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces/
-sudo bash get_terraces.sh
-
+sh get_terraces.sh
 ```
-This will create the file get_terraces.out.
+This will create the executable `get_terraces.out`.
 
 Going forward, you can run the terrace driver by navigating to this folder and typing the command:
-
 ```sh
 ./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
 ```
@@ -159,14 +167,17 @@ We will now test the terrace install.
 
 ## Test the Terrace install
 
-To run the terraces you must have a channel heads (or "sources") file: Eel_River_DEM_ATsources.csv created by running the channel extraction, a coordinates file identifying upstream and downstream points (Eel_River_DEM_coordinates.csv), and a parameter file (LSDTT_terraces.param) in your folder. 
+To run the terraces you must have a channel heads (or "sources") file: Eel_River_DEM_ATsources.csv created by running the channel extraction, a coordinates file identifying upstream and downstream points (Eel_River_DEM_coordinates.csv), and a parameter file (LSDTT_terraces.param) in your folder.
 
 Navigate to the Example Data folder.
+```
+cd $HOME/Desktop/Eel_River_Terrace_Example
+```
 
 Open `LSDTT_terraces.param` and edit it to include the proper path to
-your `Eel_River_Terrace_Example` folder. 
+your `Eel_River_Terrace_Example` folder.
 
-The parameter file should have this text (modify the read path for your computer):
+The parameter file should have this text (modify the `read path` for your computer):
 
 ```sh
 # This is a driver file for LSDTopoTools
@@ -201,20 +212,17 @@ Min patch size: 1000
 Min terrace height: 5
 ```
 
-## Now, test the Terrace driver by runnning the Eel River Example.
+## Now, test the Terrace driver by running the Eel River Example.
 
 Navigate back to the Terrace driver functions folder.
 
 ```sh
-
-cd LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces/
+cd $HOME/LSDTopoTools/LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces/
 ```
+
 Run the terrace code inserting the path to your Eel River files.
-
 ```sh
-
-./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
-
+./get_terraces.out $HOME/Desktop/Eel_River_Terrace_Example LSDTT_terraces.param
 ```
 
 This will create a number of files. Including:
@@ -228,9 +236,8 @@ Try opening this .bil in GIS to see how your terraces look.
 # LSDTT Official Installation instructions:
 The steps above were adapted from the installation guides below.
 
-### LSDTT Installation: 
+### LSDTT Installation:
 https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_installation.html#_installing_natively_on_a_linux_system
 
-### Terraces: 
+### Terraces:
 https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_floodplains_terraces.html#_the_methodology
-

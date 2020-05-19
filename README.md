@@ -174,7 +174,7 @@ Navigate to the Example Data folder.
 cd $HOME/Desktop/Eel_River_Terrace_Example
 ```
 
-Open `LSDTT_terraces.param` and edit it to include the proper path to
+Open `LSDTT_terraces.param` (you downloaded this with the example data earlier) and edit it to include the proper path to
 your `Eel_River_Terrace_Example` folder.
 
 The parameter file should have this text (modify the `read path` for your computer):

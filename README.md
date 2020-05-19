@@ -211,6 +211,7 @@ Slope upper percentile: 75
 Min patch size: 1000
 Min terrace height: 5
 ```
+For more information on input parameters for the terrace extraction, see LSDTT's help page (Table 2, Section 5.3): https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_floodplains_terraces.html#_creating_the_parameter_file
 
 ## Now, test the Terrace driver by running the Eel River Example.
 

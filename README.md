@@ -74,10 +74,10 @@ sh lsdtt2_terminal.sh
 This will start up LSDTT in your terminal window. You can now access all the LSDTT tools by simply typing the command name (`lsdtt-<something>`) followed by the driver file name into the command prompt.
 
 
-# You can now test the install by running a channel extraction on example data.
+#### You can now test the install by running a channel extraction on example data.
 
-## Download the example data to test the LSDTT install and to test the Terraces at a later step.
-(Set to do on your desktop, but you can do this anywhere.)
+## Getting Example Data
+Download the example data to test the LSDTT install and to test the Terraces at a later step. (Set to do on your desktop, but you can do this anywhere.)
 
 ```sh
 # Test is set for your desktop, but you can do this anywhere
@@ -98,8 +98,10 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/e
 # Download coordinates file: upstream and downstream ends of analysis reach (for Terraces later)
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/Eel_River_DEM_coordinates.csv
 ```
-## Test the LSDTT Install by Running a Channel Extraction
+## Test the LSDTT Install 
+Running a channel extraction using the example data to test the LSDTT install.
 
+#### Create a driver
 In the Eel River folder you just downloaded the example data into, create a driver file. This will tell the channel extractor what to do.
 
 ```sh
@@ -138,6 +140,8 @@ print_sources_to_csv: true
 ```
 Save and exit from the driver file.
 
+#### Run the Channel Extraction
+
 Now, run the channel extraction.
 ```sh
 lsdtt-channel-extraction eel_area_threshold.driver
@@ -146,7 +150,8 @@ This will output a number of files, including your channel network (Eel_River_DE
 
 Once you have your extracted channel network and channel heads, you can run the Terrace tool. You must first download and install it.
 
-# Install LSDTT Terrace driver.
+## Install LSDTT Terrace driver.
+Downloading and installing the LSDTT Terrace driver.
 
 Make sure you have already downloaded LSDTT and tested it by running a channel extraction before proceeding to this step. Ensure you have all the prerequesite packages installed as well.
 
@@ -165,7 +170,7 @@ Going forward, you can run the terrace driver by navigating to this folder and t
 
 We will now test the terrace install.
 
-## Test the Terrace install
+#### Test the Terrace install
 
 To run the terraces you must have a channel heads (or "sources") file: Eel_River_DEM_ATsources.csv created by running the channel extraction, a coordinates file identifying upstream and downstream points (Eel_River_DEM_coordinates.csv), and a parameter file (LSDTT_terraces.param) in your folder.
 
@@ -213,7 +218,7 @@ Min terrace height: 5
 ```
 For more information on input parameters for the terrace extraction, see LSDTT's help page (Table 2, Section 5.3): https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_floodplains_terraces.html#_creating_the_parameter_file
 
-## Now, test the Terrace driver by running the Eel River Example.
+#### Now, test the Terrace driver by running the Eel River Example.
 
 Navigate back to the Terrace driver functions folder.
 
@@ -232,9 +237,9 @@ DEM_name_terrace_IDs.bil and .hdr: A raster of terrace locations with each terra
 
 Try opening this .bil in GIS to see how your terraces look.
 
-#### You should now have both LSDTT and the Terraces driver successfully installed. For more detailed instructions and troubleshooting, see links below.
+### You should now have both LSDTT and the Terraces driver successfully installed. For more detailed instructions and troubleshooting, see links below.
 
-# LSDTT Official Installation instructions:
+## LSDTT Official Installation instructions:
 The steps above were adapted from the installation guides below.
 
 ### LSDTT Installation:

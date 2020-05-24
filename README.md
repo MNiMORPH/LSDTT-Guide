@@ -245,6 +245,7 @@ Try opening this .bil in GIS to see how your terraces look.
 
 * The filtered DEM takes some time to make. It is best to make it only once, and then update the `.param` file to point to this if you need to make any changes.
 * The filtered DEM has an area that is smaller than the unfiltered DEM. The channel endpoints must lie some distance from the edges of this. Leave some space as padding.
+* The output terraces file(s) will give entirely NULL values if any part of the swath (whose topogrpahy the algorimth analyzes to find terraces) is outside of the DEM (and therefore contains a NULL value).
 
 ## LSDTT Official Installation instructions:
 The steps above were adapted from the installation guides below.

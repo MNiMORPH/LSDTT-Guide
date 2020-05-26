@@ -92,23 +92,20 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/F
 
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/FloodplainTerraceData/Eel_River_DEM.hdr
 
-# Download parameter file (Text file that tells LSDTT what to do, we will use this to test the Terraces later)
-wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/LSDTT_terraces.param
-
 # Download coordinates file: upstream and downstream ends of analysis reach (for Terraces later)
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/Eel_River_DEM_coordinates.csv
 ```
 ## Test the LSDTT Install 
 Running a channel extraction using the example data to test the LSDTT install.
 
-#### Create a driver
-In the Eel River folder you just downloaded the example data into, create a driver file. This will tell the channel extractor what to do.
+#### Create a parameter file
+In the Eel River folder you just downloaded the example data into, create a parameter file. This will tell the channel extractor what to do.
 
 ```sh
-vi eel_area_threshold.driver
+vi eel_area_threshold.param
 ```
 
-Populate your driver file with this text. Modify the read and write path to match your computer's file system:
+Populate your parameter file with this text. Modify the read and write path to match your computer's file system:
 
 ```sh
 # Parameters for channel extraction
@@ -138,13 +135,13 @@ print_dreich_channels: false
 print_stream_order_raster: true
 print_sources_to_csv: true
 ```
-Save and exit from the driver file.
+Save and exit from the parameter file.
 
 #### Run the Channel Extraction
 
 Now, run the channel extraction.
 ```sh
-lsdtt-channel-extraction eel_area_threshold.driver
+lsdtt-channel-extraction eel_area_threshold.param
 ```
 This will output a number of files, including your channel network (Eel_River_DEM_AT_CN.csv) and your channel heads (EEL_River_DEM_ATsources.csv). Test that these make sense by viewing these files in a GIS.
 
@@ -178,8 +175,7 @@ Navigate to the Example Data folder.
 ```
 cd $HOME/Desktop/Eel_River_Terrace_Example
 ```
-
-Open `LSDTT_terraces.param` (you downloaded this with the example data earlier) and edit it to include the proper path to
+Create `LSDTT_terraces.param` and populate it with the text below. Edit it to include the proper path to
 your `Eel_River_Terrace_Example` folder.
 
 The parameter file should have this text (modify the `read path` for your computer):

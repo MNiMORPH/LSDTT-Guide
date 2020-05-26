@@ -164,6 +164,38 @@ Going forward, you can run the terrace driver by navigating to this folder and t
 ```sh
 ./get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
 ```
+You can also create a permanent path in your `.profile` going forward.
+
+#### Permanent path for terraces
+
+Open your bash profile.
+```sh
+vi ~/.profile
+```
+*Note: sometimes you will edit `~/.bashrc` instead of `~/.profile`.*
+
+Add the following lines, with a path to `.get_terraces.out` that is updated for your computer, to the bottom of your `.profile`. If you already added in LSDTopoTools to your permanent path, you can add the terraces below this. Before pasting, press `i` to enter "insert mode" in vi:
+```sh
+# LSDTT Terraces
+export PATH="$PATH:/home/<YOUR_USERNAME>/LSDTopoTools/LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces"
+```
+*To paste within the terminal, press `CTRL+SHIFT+V`.*
+
+Then press `escape` to return to command mode, and `:x`, followed by `enter`, to save and exit.
+
+This will set your path each time you open a new terminal window. However, you opened your current terminal window before changing your `.profile`. To refresh your environment variables (such as your `PATH`) from your `.profile`, type:
+```sh
+source ~/.profile
+```
+
+Test whether the install worked by typing `get_terraces` in any directory EXCEPT `$HOME/LSDTopoTools/LSDTopoTools_FloodplainTerraceExtraction/driver_functions_Floodplains-Terraces` and seeing if it will autocomplete (i.e., by hitting tab twice).
+
+In order to use the Terrace driver going forward you will just need to enter:
+
+```sh
+get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
+```
+Ensure that your DEM and parameter file are both in the same folder before running this command. 
 
 We will now test the terrace install.
 

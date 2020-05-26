@@ -181,7 +181,7 @@ your `Eel_River_Terrace_Example` folder.
 The parameter file should have this text (modify the `read path` for your computer):
 
 ```sh
-# This is a driver file for LSDTopoTools
+# This is a parameter file for LSDTopoTools
 # Any lines with the # symbol in the first row will be ignored
 
 # File information

@@ -30,6 +30,7 @@ Navigate to newly created LSDTopoTools2 directory and run the start up script.
 cd $HOME/LSDTopoTools/LSDTopoTools2
 sh lsdtt2_setup.sh
 ```
+LSDTT2 will prompt you to ask whether it should check to see if you already have an LSDTopoTools2 directory. It uses a find function to do this. If you have it complete the search, it will then ask you where you would like to install. Select your location and it will continue the setup process.
 
 If this completed successfully, LSDTT2 should now be installed on your computer. You can test it by typing:
 ```sh

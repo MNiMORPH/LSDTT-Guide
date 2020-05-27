@@ -1,4 +1,5 @@
 # LSDTopoTools and LSDTopoTools Terraces Installation instructions (Ubuntu 19.10)
+
 See bottom of page for links to the LSDTopoTools official installation guides and help.
 
 ## Install LSDTopoTools2 (LSDTT2)
@@ -96,10 +97,10 @@ wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/F
 # Download coordinates file: upstream and downstream ends of analysis reach (for Terraces later)
 wget https://raw.githubusercontent.com/LSDtopotools/ExampleTopoDatasets/master/example_parameter_files/ExampleFiles_TerraceExtraction/Eel_River_DEM_coordinates.csv
 ```
-For more example data to use to test LSDTT2, see 
+For more example data to use to test LSDTT2, see
 https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_installation.html#_getting_the_example_data
 
-## Test the LSDTT2 Install 
+## Test the LSDTT2 Install
 Running a channel extraction using the example data to test the LSDTT2 install.
 
 #### Create a parameter file
@@ -141,7 +142,7 @@ print_sources_to_csv: true
 ```
 Save and exit from the parameter file.
 
-For more information on input parameters, see 
+For more information on input parameters, see
 
 https://lsdtopotools.github.io/LSDTT_documentation/LSDTT_basic_usage.html#_basic_file_input_and_output
 
@@ -203,7 +204,7 @@ In order to use the Terrace driver going forward you will just need to enter:
 ```sh
 get_terraces.out /path/to/DEM/location/ name_of_parameter_file.param
 ```
-Ensure that your DEM and parameter file are both in the same folder before running this command. 
+Ensure that your DEM and parameter file are both in the same folder before running this command.
 
 We will now test the terrace install.
 
@@ -282,6 +283,7 @@ Try opening this .bil in GIS to see how your terraces look.
 * The filtered DEM takes some time to make. It is best to make it only once, and then update the `.param` file to point to this if you need to make any changes.
 * The filtered DEM has an area that is smaller than the unfiltered DEM. The channel endpoints must lie some distance from the edges of this. Leave some space as padding.
 * The output terraces file(s) will give entirely NULL values if any part of the swath (whose topogrpahy the algorimth analyzes to find terraces) is outside of the DEM (and therefore contains a NULL value).
+* If you want to try to test different thresholds for the terraces, you can do so using a GIS following the instructions here: [Using GIS to test terrace-definition thresholds](testing-thresholds-GIS.md).
 
 ## LSDTT2 Official Installation instructions:
 The steps above were adapted from the installation guides below.
